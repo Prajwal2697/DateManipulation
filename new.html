@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+   var pdiv = document.createElement('div');
+   pdiv.setAttribute('style','padding-top:20px');
+
+     var dataele = document.createElement('input');
+     dataele.setAttribute('type','date');
+     dataele.name="dob";
+     dataele.id = 'dob';
+     dataele.classList.add('input-elem');
+     pdiv.appendChild(dataele);
+
+     var button = document.createElement('button');
+     button.setAttribute('style','margin-left:10px')
+     button.innerHTML = "Display Date";
+     button.setAttribute('class','btn');
+     button.setAttribute('onclick','displaydate');
+
+     pdiv.appendChild(button)
+     document.body.appendChild(pdiv)
+
+     var displaydata = document.createElement('div');
+     displaydata.id = 'disp-data';
+
+    displaydata.append(displaydate);
+   
+
+    function displaydate(){
+        var input = document.getElementById('dob').value;
+        if(Date.parse(input)){
+            var inputDate = new Date(input);
+            var currentDate = new Date();
+            var millisecdiff = parseInt(currentDate.getTime()) - parseInt(inputDate.getTime());
+            var secondsdiff = mathfloorval(millisecdiff,1000);
+            var minutesdiff = mathfloorval(secondsdiff,60);
+            var hoursdiff = mathfloorval(minutesdiff,60);
+            var daydiff = mathfloorval(hoursdiff,24);
+
+            displaydata.innerHTML = 
+            `Given date ${inputDate}<br>
+            milliseconds ${millisecdiff}<br>
+            seconds ${secondsdiff}<br>
+            minutes ${minutesdiff}<br>
+            hours ${hoursdiff}<br>
+            days ${daydiff} `;
+        }
+        else{
+            displaydata.innerHTML = 'invalid date selected';
+        }
+
+        function mathfloorval (value1,value2){
+            return Math.floor(value1/value2)
+        }
+        document.body.append(displaydata);
+
+        var d = new Date();
+        var res =d.getTime();
+        console.log(res)
+    }
+
+
+    </script>
+   
+
+</body>
+</html>
